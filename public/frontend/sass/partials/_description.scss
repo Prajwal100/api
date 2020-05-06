@@ -1,0 +1,122 @@
+@media(max-width: 992px){
+body{
+	padding-top: 50px;
+}
+}
+.doc-content{
+	display: flex;
+	padding-left: 220px;
+	@media(max-width: 992px){
+		padding-left: 0;
+		width: 100%;
+    	overflow: hidden;
+	}
+	@media(max-width: 767px){
+		display:block;
+	}
+	.description{
+		padding: 40px 20px;
+		border-bottom: 1px solid #f0f0f0;
+	}
+	.docs{
+		background:#2d3134;
+		padding: 40px 20px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		color: #d0d4d7;
+
+		.nav-tabs{
+			border-bottom: none;
+			margin-bottom: 20px;
+			li{
+				&.active{
+					a{
+						background:#0099e5;
+						color: #fff;
+						&:hover{
+						background:#0099e5;
+						color: #fff;
+						}
+					}
+				}
+			}
+		}
+		.nav-tabs>li>a{
+			min-height: 32px;
+			line-height: 32px;
+			padding: 0 10px;
+			border-radius: 16px;
+			font-size: 13px;
+			margin-bottom: 5px;
+			border:1px solid rgba(255, 255, 255, 0.1);
+			color: #0099e5;
+			&:hover{
+				background:rgba(0, 0, 0, 0.05);
+				color: #0099e5;
+			}
+		}
+		p{
+			color: #d0d4d7;
+		}
+		pre{
+			background: #272b2d;
+			border:none;
+			margin-bottom: 40px;
+		}
+		.copytoclipboard{
+			padding: 0 5px;
+			font-size: 12px;
+			border-radius: 0 4px 0 4px;
+			top: 0 !important;
+			right: 0 !important;
+			background:rgba(0, 0, 0, 0.2);
+			color: rgba(255, 255, 255, 0.2);
+			border:none;
+			outline: 0;
+			&:hover{
+				background:rgba(0, 0, 0, 0.3);
+				color: rgba(255, 255, 255, 0.3);
+			}
+		}
+		code[class*="language-"], pre[class*="language-"]{
+			text-shadow: none;
+		}
+		code.language-http{
+			color: #00BCD4;
+		}
+		.table{
+			border:1px solid rgba(255, 255, 255, 0.05);
+			border-radius:4px;
+			thead{
+				border:none;
+				th{
+					border:none;
+					padding: 10px 30px;
+					@media(max-width: 992px){
+					padding: 8px 12px;
+					}
+				}
+			}
+			tr{
+				border:none;
+				td{
+					border:none;
+					padding: 10px 30px;
+					font-size: 13px;
+					@media(max-width: 992px){
+					padding: 8px 12px;
+					}
+					&:first-child{
+						text-align:right;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+		.table-striped>tbody>tr:nth-of-type(odd){
+			background:rgba(255, 255, 255, 0.05);
+		}
+		.table-striped>tbody>tr:nth-of-type(even){
+			background:rgba(0, 0, 0, 0.05);
+		}
+	}
+}
