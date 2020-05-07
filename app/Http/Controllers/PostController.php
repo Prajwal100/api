@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tab;
+use App\Models\PostTab;
 
 class PostController extends Controller
 {
     protected $category=null;
     protected $post=null;
+    protected $tab=null;
+    protected $posttab=null;
 
-    public function __construct(Category $category,Post $post){
+
+    public function __construct(Category $category,Post $post,Tab $tab,PostTab $posttab){
         $this->category=$category;
         $this->post=$post;
+        $this->tab=$tab;
+        $this->posttab=$posttab;
+
     }
     /**
      * Display a listing of the resource.
@@ -33,12 +41,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        $parent_cats=$this->category->where('is_parent',1)->get();
-        $child_cats=$this->category->where('is_parent',0)->get();
+        $parent_cats=$this->category->get();
+        // $tabs=$this->tab->get();
+        // $child_cats=$this->category->where('is_parent',0)->get();
         // dd($child_cats);
         // dd($parent_cats);
         return view('backend.posts.create')
-        ->with('child_cats',$child_cats)
+        // ->with('tabs',$tabs)
         ->with('parent_cats',$parent_cats);
     }
 
@@ -148,5 +157,62 @@ class PostController extends Controller
             request()->session()->flash('error','Error while deleting post');
         }
         return redirect()->route('post.index');
+    }
+
+    public function postTab(){
+        $all_post_tab=$this->posttab->get();
+        return view('backend.posts.post-tab.post-tab-index')->with('post_tab',$all_post_tab);
+    }
+
+    public function postCreate(){
+        $tabs=$this->tab->get();
+        return view('backend.posts.post-tab.post-tab-create')->with('tabs',$tabs);
+    }
+
+    public function postStore(Request $request){
+        // dd($request->all());
+        $data=$request->all();
+        $this->posttab->fill($data);
+        $status=$this->posttab->save();
+        if($status){
+            request()->session()->flash('success','Successfully added');
+        }
+        else{
+            request()->session()->flash('error','Error while adding');
+        }
+        return redirect()->route('post-tab-manager');
+    }
+
+    public function postDelete($id){
+        $this->posttab=$this->posttab->find($id);
+        if(!$this->posttab){
+            request()->session()->flash('error','Not found');
+            return redirect()->route('post-tab-manager');
+        }
+        $del=$this->posttab->delete();
+        if($del){
+            request()->session()->flash('success','Successfully deleted');
+        }
+        else{
+            request()->session()->flash('error','Error while deleting');
+        }
+        return redirect()->route('post-tab-manager');
+    }
+
+
+    public function getTabType(Request $request){
+        // dd($request->title);
+        $this->tab=$this->tab->find($request->id);
+        if(!$this->tab){
+            return response()->json(['status'=>false,'msg'=>'tab not found','data'=>null]);
+        }
+        $Tab_type=$this->tab->getTypeByTitle($request->id);
+        // dd($Tab_type);
+        if($Tab_type->count()<=0){
+            return response()->json(['status'=>false,'msg'=>'','data'=>null]); 
+        }
+        else{
+            return response()->json(['status'=>true,'msg'=>'','data'=>$Tab_type]);
+        }
     }
 }

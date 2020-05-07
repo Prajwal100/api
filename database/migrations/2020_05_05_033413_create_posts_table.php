@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->enum('status',['active','inactive'])->default('active');
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('SET NULL');
-            $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('SET NULL');
+            $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

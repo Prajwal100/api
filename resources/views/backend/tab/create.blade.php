@@ -6,7 +6,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Type List</div>
+                <div class="ibox-title">Tab List</div>
             </div>
             <div class="ibox-body">
                <form action="{{route('tab.store')}}" method="POST">
@@ -17,6 +17,13 @@
                         <input type="text" name="title" placeholder="Enter title name" class="form-control" required>
                     </div>
 
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select name="type" class="form-control">
+                            <option value="table">Table</option>
+                            <option value="snippet">Snippet</option>
+                        </select>
+                    </div>
                   
                     <div class="form-group">
                         <label for="status">Status</label>

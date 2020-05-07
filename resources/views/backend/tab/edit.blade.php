@@ -18,6 +18,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="type">Type</label>
+                        <select name="type" class="form-control">
+                            <option value="table">Table</option>
+                            <option value="snippet">Snippet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
                             <option value="active" {{($tab_data->status=='active') ? 'selected' : ''}}>active</option>

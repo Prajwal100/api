@@ -16,6 +16,7 @@ class CreateTabsTable extends Migration
         Schema::create('tabs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->enum('type',['table','snippet']);
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

@@ -43,7 +43,8 @@ class TabController extends Controller
         // dd($request->all());
         $this->validate($request, [
             'title'=>'string|required',
-            'status'=>'required|in:active,inactive'
+            'status'=>'required|in:active,inactive',
+            'type'=>'required|in:table,snippet'
         ]);
 
         
@@ -104,7 +105,9 @@ class TabController extends Controller
         }
         $this->validate($request, [
             'title'=>'string|required',
-            'status'=>'required|in:active,inactive'
+            'status'=>'required|in:active,inactive',
+            'type'=>'required|in:table,snippet'
+
         ]);
 
         

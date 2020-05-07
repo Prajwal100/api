@@ -30,4 +30,6 @@ class Post extends Model
     public function getAllPost(){
         return $this->with('cat_info')->orderBy('id','DESC')->get();
     }
+
+    
 }

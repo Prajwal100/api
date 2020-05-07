@@ -28,7 +28,7 @@
                                     <th ><button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete All Selected"><i class="fa fa-trash font-14"></i></buttton></th>
                                     <th>Title</th>
                                     <th>Category</th>
-                                    <th>SubCategory</th>
+                                    <th>Pots Tab Manager</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -48,11 +48,7 @@
                                         </td>
                                         <td>{{$post_data->title}}</td>
                                         <td>{{$post_data->cat_info->title}}</td>
-                                        <td>
-                                            @foreach($child_cat_id as $child_cat)
-                                                {{$child_cat->title}}
-                                            @endforeach
-                                        </td>
+                                        <td><a href="{{route('post-tab-manager')}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
                                         <td>
                                             @if($post_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

@@ -27,6 +27,7 @@
                                 <tr>
                                     <th ><button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete All Selected"><i class="fa fa-trash font-14"></i></buttton></th>
                                     <th>Title</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -42,6 +43,7 @@
                                             </label>
                                         </td>
                                         <td>{{$tab_data->title}}</td>
+                                        <td>{{$tab_data->type}}</td>
                                         <td>
                                             @if($tab_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

@@ -30,13 +30,13 @@
                     <div class="form-group">
                         <label for="cat_id">Category</label>
                         <select name="cat_id" class="form-control" id="cat_id">
-                            <option>--Select Categories</option>
+                            <option>--Select Categories--</option>
                             @foreach($parent_cats as $key=>$cats)
                                 <option value="{{$cats->id}}">{{$cats->title}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group d-none" id="child_cat_div">
+                    {{-- <div class="form-group d-none" id="child_cat_div">
                         <label for="child_cat_id">Sub Category</label>
                         <select name="child_cat_id" class="form-control" id="child_cat_id">
                             <option>--Select Sub Categories</option>
@@ -44,7 +44,17 @@
                                 <option value="{{$cats->id}}">{{$cats->title}}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
+
+                    {{-- <div class="form-group">
+                        <label for="tab_id">Tab</label>
+                        <select name="tab_id" class="form-control" id="tab_id">
+                            <option>--Select Tab--</option>
+                            @foreach($tabs as $key=>$tab)
+                                <option value="{{$tab->id}}">{{$tab->type}}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
