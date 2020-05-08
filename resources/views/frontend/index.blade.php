@@ -11,154 +11,26 @@
 		<div class="no-padding sidebar" id="sidenav">
 			<div class="logo"><a href=""><img src="frontend/images/logo.png" class="img-responsive"></a></div>
 			<div class="navigation" id="scroll-nav">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active">
-						<a href="#introduction"><h4 class="title">Introduction</h4></a>
-					</li>
+        @foreach($category as $key=>$cat)
+        <ul class="nav nav-pills nav-stacked">
+          @if($key==0)
+            <li class="active">
+              <a href="#introduction"><h4 class="title">Introduction</h4></a>
+            </li>
+          @endif
 					<li>
-					<a href="#signIn"><h4 class="title"><b class="caret"></b>Account Ops</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#signIn" title="SignIn">SignIn</a></li>
-							<li><a href="#RenewToken" title="RenewToken">RenewToken</a></li> 
-							<li><a href="#GetDoNotDisturbStatusSettings" title="Get DoNotDisturb Status Settings">Get DoNotDisturb Status Settings</a></li>
-							<li><a href="#GetDoNotDisturbSettings" title="Get DoNotDisturb Settings">Get DoNotDisturb Settings</a></li>
-							<li><a href="#SetDoNotDisturbStatusSettings" title="Set DoNotDisturb Status Settings">Set DoNotDisturb Status Settings</a></li>
-							<li><a href="#SetDoNotDisturbSettings" title="Set DoNotDisturb Settings">Set DoNotDisturb Settings</a></li>
-							<li><a href="#AccountListQuery" title="Account List Query">Account List Query</a></li>
-							<li><a href="#SubAccountList" title="Get List of Sub-Accounts">Get List of Sub-Accounts </a></li>
-							<li><a href="#GetUserRoleInfo" title="Get User Role Information">Get User Role Information</a></li>
-							<li><a href="#SetUserRoleInfo" title="Set User Role Information">Set User Role Information</a></li>
-							<li><a href="#GetUserRoleInfo" title="Get Role Information">Get Role Information</a></li>
-							<li><a href="#SetUserRoleInfo" title="Set Role Information">Set Role Information</a></li>
-							<li><a href="#GetAllRoles" title="Get All Roles ">Get All Roles </a></li>
+					<a href="#signIn"><h4 class="title"><b class="caret"></b>{{$cat->title}}</h4></a>
+            <ul class="sub-menu">
+            @isset($cat->post)
+              @foreach($cat->post as $post)
+              <li><a href="#signIn" title="SignIn">{{$post->title}}</a></li>
+              @endforeach
+            @endisset
 						</ul>
 					</li>
 				</ul>
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-					<a href="#InitiateAnyCampaign"><h4 class="title"><b class="caret"></b>Ushur Engagements</h4></a>
-						<ul class="sub-menu">
-						<li><a href="#InitiateAnyCampaign" title="Initiate Any Campaign">Initiate Any Campaign</a></li>
-						<li><a href="#NotifyAMsg" title="Notify a Message">Notify a Message</a></li>
-						<li><a href="#InitiateCampaignWithaRequestId" title="Initiate Campaign With a Request Id">Initiate Campaign With a Request Id</a></li>
-						<li><a href="#GetDetailedResponsesForaRequestId" title="Get Detailed Responses For a Request Id">Get Detailed Responses For a Request Id</a></li>
-						<li><a href="#GetTaggedResponsesForaRequestId" title="Get Tagged Responses For a Request Id">Get Tagged Responses For a Request Id</a></li>
-		                <li><a href="#QueryFilters" title="Query Filters">Query Filters</a></li>
-		                <li><a href="#GetAllDetailedResponses" title="Get All Detailed Responses">Get All Detailed Responses</a></li>
-					<!--	<li><a href="#GetStats" title="Get Status">Get Status </a></li>
-						<li><a href="#getCampaignList" title="Get List of all Campaigns">Get List of all Campaigns</a></li>
-						<li><a href="#getOngoingCampaigns" title="Get Ongoing Campaigns">Get Ongoing Campaigns</a></li> -->
-		                <li><a href="#GetTaggedResponses" title="Get Tagged Responses">Get Tagged Responses</a></li>
-		                <li><a href="#SetCallBackNumber" title="Set Call Back Number">Set Call Back Number</a></li>
-						<li><a href="#IncomingEmailProcesing" title="Incoming Email Processing">Incoming Email Processing</a></li>
-						<li><a href="#getBlackListInfo" title="Get BlackList Information">Get BlackList Information</a></li>
-						<li><a href="#blackListPhone" title="getBlackList A PhoneNumber"> BlackList A PhoneNumber</a></li>
-						<li><a href="#removePhoneFromBlackList" title="Remove PhoneNumber From BlackList">Remove PhoneNumber From BlackList</a></li>
-						<li><a href="#getWhiteListInfo" title="Get WhiteList Information">Get WhiteList Information</a></li>
-						<li><a href="#whiteListPhone" title="WhiteList A PhoneNumber">WhiteList A PhoneNumber</a></li>
-						<li><a href="#removePhoneFromWhiteList" title="Remove PhoneNumber From WhiteList">Remove PhoneNumber From WhiteList</a></li>
-						<li><a href="#GetBlackToWhiteListed" title="List PhoneNumbers from Black To WhiteList">List PhoneNumbers from Black To WhiteList</a></li>
-						<li><a href="#GetUeTagList" title="Get UeTag List">Get UeTag List</a></li>
-						<li><a href="#CancelUshur" title="Cancel Ushur/Campaign">Cancel Ushur/Campaign</a></li>
-					</ul>
-					</li>
-				</ul>
-				<ul class="nav nav-pills nav-stacked">
-                	<li>
-                	<a href="#AddorUpdateEnterpriseDataonUshur"><h4 class="title"><b class="caret"></b>Enterprise Data API</h4></a>
-                		<ul class="sub-menu">
-                			<li><a href="#AddorUpdateEnterpriseDataonUshur" title="Add or Update Enterprise Data on Ushur">Add or Update Enterprise Data on Ushur</a></li>
-		                	<li><a href="#GetEnterpriseDataonUshur" title="Get Enterprise Data on Ushur">Get Enterprise Data on Ushur</a></li>
-						<!--	<li><a href="#GetEnterpriseDataonUshur" title="Get Enterprise Data on Ushur">Get Enterprise Data on Ushur</a></li> -->
-		                	<li><a href="#DeleteEnterpriseDataonUshur" title="Delete Enterprise Data on Ushur">Delete Enterprise Data on Ushur</a></li>
-		                	<li><a href="#InitiateCampaignWithEnterpriseData" title="Initiate Campaign With Enterprise Data">Initiate Campaign With Enterprise Data</a></li>
-                		</ul>
-                	</li>
-				</ul>
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-					<a href="#AddUpdateEnterpriseContact"><h4 class="title"><b class="caret"></b>Enterprise Contact API</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#AddUpdateEnterpriseContact" title="Add or Update Enterprise Contact on Ushur">Add or Update Enterprise Contact on Ushur</a></li>
-			                <li><a href="#GetEnterpriseContacts" title="Get Enterprise Contacts on Ushur">Get Enterprise Contacts on Ushur</a></li>
-			                <li><a href="#DeleteEnterpriseContact" title="Delete Enterprise Contact on Ushur">Delete Enterprise Contact on Ushur</a></li>
-			                <li><a href="#SetContactDoNotDisturb" title="Set Contact DoNotDisturb Settings">Set Contact DoNotDisturb Settings</a></li>
-			                <li><a href="#GetContactDoNotDisturb" title="Get Contact DoNotDisturb Settings">Get Contact DoNotDisturb Settings</a></li>
-						</ul>
-					</li>
-                </ul>
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-						<a href="#PhoneAuthService"><h4 class="title"><b class="caret"></b>Authentication Services</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#PhoneAuthService" title="Phone Auth Service">Phone Auth Service</a></li>
-                	        <li><a href="#ConfirmPhoneNumber" title="Confirm Phone Number">Confirm Phone Number</a></li>
-					    </ul>
-					</li>
-                </ul>
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-					<a href="#GenerateShortURL"><h4 class="title"><b class="caret"></b>URL Services</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#GenerateShortURL" title="Generate Short URL">Generate Short URL</a></li>
-			                <li><a href="#GetShortURLList" title="Get Short URL List">Get Short URL List</a></li>
-			                <li><a href="#ActionURL" title="Action URL">Action URL</a></li>
-						</ul>
-					</li>	                
-                </ul>
-               <!-- <ul class="nav nav-pills nav-stacked">
-                	<li>
-                	    <a href="#SetDomain"><h4 class="title"><b class="caret"></b>Domain Services</h4></a>
-                		<ul class="sub-menu">
-                			<li><a href="#SetDomain" title="Set Domain">Set Domain</a></li>
-	                        <li><a href="#GetDomainStats" title="Get Domain Stats">Get Domain Stats</a></li>
-                		</ul>
-                	</li>
-	            </ul>  -->
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-					<a href="#GetEnterpriseStats"><h4 class="title"><b class="caret"></b>Stats Services</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#GetEnterpriseStats" title="Get Enterprise Stats">Get Enterprise Stats</a></li>
-                	        <li><a href="#GetCampaignStats" title="Get Campaign Stats">Get Campaign Stats</a></li>
-						</ul>
-					</li>
-                </ul>
-				<ul class="nav nav-pills nav-stacked">
-					<li>
-						<a href="#GetChatHistory"><h4 class="title"><b class="caret"></b>Chat Services</h4></a>
-						<ul class="sub-menu">
-							<li><a href="#GetChatHistory" title="Get Chat History">Get Chat History</a></li>
-						</ul>
-					</li>
-                </ul>
-                <ul class="nav nav-pills nav-stacked">
-	                <li>
-	                <a href="#ReserveUshurID"><h4 class="title"><b class="caret"></b>UshurID Services</h4></a>
-	                	<ul class="sub-menu">
-	                		<li><a href="#ReserveUshurID" title="Reserve Ushur ID">Reserve Ushur ID</a></li>
-	                        <li><a href="#SaveUshurID" title="Save Ushur ID">Save Ushur ID</a></li>
-	                     <!--   <li><a href="#SetModes" title="Set Modes">Set Modes</a></li> -->
-	                	</ul>
-	                </li>
-                </ul>
-                <ul class="nav nav-pills nav-stacked">
-	                <li>
-	                	<a href="#GetAvailabilityStatus"><h4 class="title"><b class="caret"></b>Utility Services</h4></a>
-	                	<ul class="sub-menu">
-	                		<li><a href="#GetAvailabilityStatus" title="Get Availability Status">Get Availability Status</a></li>
-			                <li><a href="#GetPhoneNumber" title="Get Phone Number">Get Phone Number</a></li>
-			                <li><a href="#GetTimezone" title="Get Timezone">Get Timezone</a></li>
-			                <li><a href="#SetTimezone" title="Set Timezone">Set Timezone</a></li>
-			                <li><a href="#GetLocation" title="Get Location">Get Location</a></li>
-			                <li><a href="#SaveAppearance" title="Save Appearance">Save Appearance</a></li>
-							<li><a href="#GetUshurActivities" title="Get Ushur Activities">Get Ushur Activities </a></li>
-							<li><a href="#GetUshurActivity" title="Get Ushur Activity">Get Ushur Activity </a></li>
-			                <li><a href="#ResponseCodes" title="Response Codes">Response Codes</a></li>
-	                	</ul>
-	                </li>
-                </ul>
-			</div>
+        @endforeach
+      </div>
 		</div>
 
 		<!-- Introduction starts -->
@@ -167,34 +39,34 @@
 				<h2 class="desc-title">Ushur API Documentation</h2>
 				<p>Ushur is an AI-powered platform that combines process automation and conversational interfaces to automate enterprise workflows.  In doing so Ushur delivers great value to those enterprises by eliminating manual work and freeing up human capital for higher valued business needs. </p>
 
-<p> Ushur’s platform offers a template-based approach to solving specific use-cases for companies. The platform offers a state-of-the-art linguistics engine, together with a drag and drop process and conversation builder, invisible apps that deliver app-like experiences without asking customers to download an app and integration hooks into standard and proprietary systems of record. Along with this infrastructure, Ushur offers real-time monitoring, audit capabilities and a powerful analytics engine. 
-</p>
-<!--<p> Ushur platform comes bundles with a rich set of APIs. In order to use the APIs, it is important to create an account with Ushur. 
-</p>
-<p><h3 class="sub-title">Account Creation:</h3>
-To add Ushur to your application, you will need to first create an account with Ushur. The following signup-link can be used to create an account:
+        <p> Ushur’s platform offers a template-based approach to solving specific use-cases for companies. The platform offers a state-of-the-art linguistics engine, together with a drag and drop process and conversation builder, invisible apps that deliver app-like experiences without asking customers to download an app and integration hooks into standard and proprietary systems of record. Along with this infrastructure, Ushur offers real-time monitoring, audit capabilities and a powerful analytics engine. 
+        </p>
+        <!--<p> Ushur platform comes bundles with a rich set of APIs. In order to use the APIs, it is important to create an account with Ushur. 
+        </p>
+        <p><h3 class="sub-title">Account Creation:</h3>
+        To add Ushur to your application, you will need to first create an account with Ushur. The following signup-link can be used to create an account:
 
-<p><a href="https://<community-server>.ushur.me/mob3.0/signup/" target="_blank">https://<community-server>.ushur.me/mob3.0/signup</a></p>
+        <p><a href="https://<community-server>.ushur.me/mob3.0/signup/" target="_blank">https://<community-server>.ushur.me/mob3.0/signup</a></p>
 
-Once you create an account, you will need to activate the account by signing-in using the  URL :
+        Once you create an account, you will need to activate the account by signing-in using the  URL :
 
-<p><a href="https://<community-server>.ushur.me/mob3.0/auth/" target="_blank">https://<community-server>.ushur.me/mob3.0/auth</a></p>
+        <p><a href="https://<community-server>.ushur.me/mob3.0/auth/" target="_blank">https://<community-server>.ushur.me/mob3.0/auth</a></p>
 
-The first-time sign-in process will prompt for a mobile number and a business name to be added to the account. This is a mandatory process. Without completing this step, your account will not be activated and usable. 
-<!-- The APIs have been grouped under the following headings:<br>
- 1. Account Ops<br>
- 2. Ushur Engagements<br>
- 3. Enterprise Data APIs<br>	
- 3. Enterprise Data APIs<br>	
- 4. Enterprise Contact API<br>
- 5. Authentication Services<br>
- 6. URL Services<br>
- 7. Domain Services<br>
- 8. Stats Services<br>
- 9. Chat Services<br>
- 10. UshurID Services<br>
- 11. Utility Services<br> 
- </p> -->
+        The first-time sign-in process will prompt for a mobile number and a business name to be added to the account. This is a mandatory process. Without completing this step, your account will not be activated and usable. 
+        <!-- The APIs have been grouped under the following headings:<br>
+        1. Account Ops<br>
+        2. Ushur Engagements<br>
+        3. Enterprise Data APIs<br>	
+        3. Enterprise Data APIs<br>	
+        4. Enterprise Contact API<br>
+        5. Authentication Services<br>
+        6. URL Services<br>
+        7. Domain Services<br>
+        8. Stats Services<br>
+        9. Chat Services<br>
+        10. UshurID Services<br>
+        11. Utility Services<br> 
+        </p> -->
 			</div>
 		</div>
 		<!-- // End of Introduction -->
@@ -202,442 +74,144 @@ The first-time sign-in process will prompt for a mobile number and a business na
 		
 		
 		
-		<!-- Signin starts -->
-		<div id="signIn" class="doc-content no-padding">
-			<div class="col-sm-5 description equal-item">
-					<h2 class="desc-title">Account Operations</h2>
-					<h3 class="sub-title">Sign In</h3>
-					<p>This is the initial API that would take in the credentials email and password for the account and return back token id which will be used in various other API calls. When other API fails to access the account because token id had expired, the application is expected to initiate this sign-in process again to retrieve the new token for further interactions with Ushur.</p>
-			</div>
-			<div class="col-sm-7 docs equal-item">
-			<ul class="nav nav-tabs" role="tablist">
-			    <li role="presentation" class="active"><a href="#signIn_RequestParameter" role="tab" data-toggle="tab">Request Parameter</a></li>
-			<!--    <li role="presentation"><a href="#signIn_RequestSample1" aria-controls="signIn_RequestSample1" role="tab" data-toggle="tab">GET Sample</a></li>  -->
-			     <li role="presentation"><a href="#signIn_RequestSample2" aria-controls="signIn_RequestSample2" role="tab" data-toggle="tab">POST Sample</a></li>
-			    <li role="presentation"><a href="#signIn_JSONResponseSample" aria-controls="signIn_JSONResponseSample" role="tab" data-toggle="tab">JSON Resp</a></li>
-			    <li role="presentation"><a href="#signIn_ResponseParameters" aria-controls="signIn_ResponseParameters" role="tab" data-toggle="tab">Response</a></li>
-			  </ul>
-			  <!-- Tab panes -->
-			  <div class="tab-content">
-			  <div role="tabpanel" class="tab-pane active" id="signIn_RequestParameter">
-			  	<table class="table table-striped table-responsive">
-						<thead>
-							<tr>
-							  <th align="left">Parameter</th>
-							  <th align="left">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							  <td class="notranslate" align="left">email</td>
-							  <td align="left">Users can login to their account using this email identifier they originally signed-up with.</td>
-							</tr>
-							<tr>
-							  <td class="notranslate" align="left">password</td>
-							  <td align="left">Password for the account.</td>
-							</tr>
-						</tbody>
-					</table>
-			  </div>
-			<!--    <div role="tabpanel" class="tab-pane" id="signIn_RequestSample1">
-			    	<pre class="language-http copytoclipboard"><code>Method: GET
-URL:  https://community.ushur.me/rest/login?email=ushurtester@gmail.com&password=testushur</code></pre>
-			    </div> -->
-			    <div role="tabpanel" class="tab-pane" id="signIn_RequestSample2">
-			    	<pre class="language-http copytoclipboard"><code>Method: POST
-URL:  https://community.ushur.me/rest/login
-Content-Type: application/json
-
-{
-"email":"ushurtester@gmail.com",
-"password":"testushur"
-}
-</code></pre>
-
-			    </div>
-			    <div role="tabpanel" class="tab-pane" id="signIn_JSONResponseSample">
-			    <label>Success</label>
-			    	<pre class="language-http copytoclipboard"><code>{
-  "status": "success",
-  "respCode": "200",
-  "tokenId": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiYmQzMjIyNy0zMTY0LTRmNGEtYmNjYy1jMzdjZTg1MjlmMzYiLCJpYXQiOjE1NTkyNzYxNDEsInN1YiI6IkFjY291bnRBdXRoIiwiaXNzIjoiVVNIVVIiLCJhY2NvdW50RW5hYmxlZCI6IlkiLCJ1c2VyQWNjb3VudCI6IkdVUlVSQUpBLktPU0lHSUBVU0hVUi5DT00iLCJleHAiOjE1NTkyODMzNDF9.m_AQBIoUPdLMqrrBZ2S7pTAnsrkDLVpAGyLif2dQR9M",
-  "emailId": "ushurtester@gmail.com",
-  "nickName": "test4ushur",
-  "tokenLeaseTime": "120",
-  "tokenRenewThreshold": "3"
-  
-  }
-   </code></pre>
-
-<label>Failure (Invalid Email Address)</label>
-<pre class="language-http copytoclipboard"><code>{
-  "status": "failure",
-  "respCode": "403",
-  "data": null,
-  "infoText": "Account not found",
-}</code></pre>
-
-<label>Failure (Invalid Password)</label>
-<pre class="language-http copytoclipboard"><code>{
-  "status": "failure",
-  "respCode": "200",
-  "infoText": "You are not a valid user",
-  "emailId": "ushurtester@gmail.com"
-}</code></pre>
-			    </div>
-			    <div role="tabpanel" class="tab-pane" id="signIn_ResponseParameters">
-			    	<table class="table table-striped table-responsive">
-		                <thead>
-			                <tr>
-			                  <th align="left">Parameter</th>
-			                  <th align="left">Description</th>
-			                </tr>
-		                </thead>
-			                <tbody>
-				                <tr>
-				                  <td class="notranslate" align="left">status</td>
-				                  <td align="left">A textual indication of success or failure.</td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">respCode</td>
-				                  <td align="left">An integer code for programmatic purposes. 200 denotes success and 4xx denotes failure. See <a href="#responseCodes">here</a> for all codes.</td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">tokenId</td>
-				                  <td align="left">For any API operation other than the signup, the caller is expected to pass the credential which is this token Id that is returned upon a successful login submission.  This tokenId must be sent in all API requests for other services. 
-				                    <br><br>
-				                    For security reasons, Ushur has some mechanisms whereby it can internally regenerate this tokenId which is unique in the system. If an API request fails, the API caller is required to invoke the Login API, retrieve the updated tokenId from the response and then use for subsequent API services.
-				                  </td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">emailId</td>
-				                  <td align="left">The submitted email identifier is returned back for correlation purposes. If there are multiple outstanding requests, this helps the caller of the APIs to correlate requests and responses.</td>
-				                </tr>
-				                 <tr>
-				                  <td class="notranslate" align="left">nickName</td>
-				                  <td align="left">The nick Name in the account is returned back.</td>
-				                </tr>
-								 <tr>
-				                  <td class="notranslate" align="left">tokenLeaseTime</td>
-				                  <td align="left">The lease duration is time to live value: the time in seconds for which the token is valid</td>
-				                </tr>
-								 <tr>
-				                  <td class="notranslate" align="left">tokenRenewThreshold</td>
-				                  <td align="left">The maximum number of times the token can be renewed</td>
-				                </tr>
-			                </tbody>
-                	</table> 
-			    </div>
-			  </div>
-					
-			</div>
-		</div>
-		<!-- // End of signin -->
-
-<!-- Renew Token Starts here -->
-
-		<div id="RenewToken" class="doc-content no-padding">
-			<div class="col-sm-5 description equal-item">
-					<h3 class="sub-title">RenewToken</h3>
-					<p>This is the API that would be required to renew the token which was given by system during login procedure , it takes the current exisiting token as input and returns the new token with new lease time </p>
-			</div>
-			<div class="col-sm-7 docs equal-item">
-			<ul class="nav nav-tabs" role="tablist">
-			    <li role="presentation" class="active"><a href="#RenewToken_RequestParameter" role="tab" data-toggle="tab">Request Parameter</a></li>
-			    <li role="presentation"><a href="#RenewToken_RequestSample2" aria-controls="RenewToken_RequestSample2" role="tab" data-toggle="tab">POST Sample</a></li>
-			    <li role="presentation"><a href="#RenewToken_JSONResponseSample" aria-controls="RenewToken_JSONResponseSample" role="tab" data-toggle="tab">JSON Resp</a></li>
-			    <li role="presentation"><a href="#RenewToken_ResponseParameters" aria-controls="RenewToken_ResponseParameters" role="tab" data-toggle="tab">Response</a></li>
-			  </ul>
-			  <!-- Tab panes -->
-			  <div class="tab-content">
-			  <div role="tabpanel" class="tab-pane active" id="RenewToken_RequestParameter">
-			  	<table class="table table-striped table-responsive">
-						<thead>
-							<tr>
-							  <th align="left">Parameter</th>
-							  <th align="left">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							  <td class="notranslate" align="left">tokenId</td>
-							  <td align="left">  For any API operation other than the signup, the caller is expected to pass the credential which is this token Id that is returned upon a successful login submission.  This tokenId must be sent in all API requests for other services. 
-				                    <br><br>
-				                    For security reasons, Ushur has some mechanisms whereby it can internally regenerate this tokenId which is unique in the system. If an API request fails, the API caller is required to invoke the Login API, retrieve the updated tokenId from the response and then use for subsequent API services.   </td>
-							</tr>
-						</tbody>
-					</table>
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="RenewToken_RequestSample2">
-			    	<pre class="language-http copytoclipboard"><code>
-					Method: POST
-					URL:  https://community.ushur.me/rest/authtoken/renew
-					Content-Type: application/json
-
-					{
-					"tokenId": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiYmQzMjIyNy0zMTY0LTRmNGEtYmNjYy1jMzdjZTg1MjlmMzYiLCJpYXQiOjE1NTkyNzYxNDEsInN1YiI6IkFjY291bnRBdXRoIiwiaXNzIjoiVVNIVVIiLCJhY2NvdW50RW5hYmxlZCI6IlkiLCJ1c2VyQWNjb3VudCI6IkdVUlVSQUpBLktPU0lHSUBVU0hVUi5DT00iLCJleHAiOjE1NTkyODMzNDF9.m_AQBIoUPdLMqrrBZ2S7pTAnsrkDLVpAGyLif2dQR9M"
-					}
-					</code>
-					</pre>
-
-			   </div>
-			   <div role="tabpanel" class="tab-pane" id="RenewToken_JSONResponseSample">
-			   <label>Success</label>
-			   <pre class="language-http copytoclipboard">
-			   <code>
-			   {
-				"status": "success",
-				"respCode": "200",
-				"tokenId": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYjY0MmIzYi1iYTcyLTQ2OWEtYTExNy1lZWIxOTRjZDU3N2MiLCJpYXQiOjE1NjA0MDY3NzksInN1YiI6IkFjY291bnRBdXRoIiwiaXNzIjoiVVNIVVIiLCJhY2NvdW50RW5hYmxlZCI6IlkiLCJ1c2VyQWNjb3VudCI6IlNIVUJIQURBLlBBVEhBS0BVU0hVUi5DT00iLCJleHAiOjE1NjA0MTM5Nzl9.cT14SSCdossIzMMtupVhgTAhI9Dr3oogFoTAqb4h7ck",
-				"tokenLeaseTime": "120",
-				"tokenRenewThreshold": "3"
-  				}
-				</code>
-				</pre>
-
-				<label>Failure (Invalid Token)</label>
-				<pre class="language-http copytoclipboard"><code>{
-				"status": "failure",
-				"respCode": "401",
-				"data": null,
-				"infoText": "You are not a valid user",
-				}</code></pre>
-
-			    </div>
-			    <div role="tabpanel" class="tab-pane" id="RenewToken_ResponseParameters">
-			    	<table class="table table-striped table-responsive">
-		                <thead>
-			                <tr>
-			                  <th align="left">Parameter</th>
-			                  <th align="left">Description</th>
-			                </tr>
-		                </thead>
-			                <tbody>
-				                <tr>
-				                  <td class="notranslate" align="left">status</td>
-				                  <td align="left">A textual indication of success or failure.</td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">respCode</td>
-				                  <td align="left">An integer code for programmatic purposes. 200 denotes success and 4xx denotes failure. See <a href="#responseCodes">here</a> for all codes.</td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">tokenId</td>
-				                  <td align="left">For any API operation other than the signup, the caller is expected to pass the credential which is this token Id that is returned upon a successful login submission.  This tokenId must be sent in all API requests for other services. 
-				                    <br><br>
-				                    For security reasons, Ushur has some mechanisms whereby it can internally regenerate this tokenId which is unique in the system. If an API request fails, the API caller is required to invoke the Login API, retrieve the updated tokenId from the response and then use for subsequent API services.
-				                  </td>
-				                </tr>
-				                <tr>
-				                  <td class="notranslate" align="left">tokenLeaseTime</td>
-				                  <td align="left">The lease duration is time to live value: the time in seconds for which the token is valid</td>
-				                </tr>
-								 <tr>
-				                  <td class="notranslate" align="left">tokenRenewThreshold</td>
-				                  <td align="left">The maximum number of times the token can be renewed</td>
-				                </tr>
-			                </tbody>
-                	</table> 
-			    </div>
-			  </div>
-			</div>
-		</div>
-
-<!-- Renew Token Ends here --->
-
-
-<!-- Get Do Not Disturb Status Settings  -->
-		<div id="GetDoNotDisturbStatusSettings" class="doc-content no-padding">
-			<div class="col-sm-5 description equal-item">
-					<h3 class="sub-title">Get DoNotDisturb Status Settings</h3>
-					<p>This is to retrieve the DoNotDisturb Status settings for the Ushur Account. An Account can represent an enterprise.</p>					
-			</div>
-			<div class="col-sm-7 docs equal-item">
-			<ul class="nav nav-tabs" role="tablist">
-			    <li role="presentation" class="active"><a href="#GetDoNotDisturbStatusSettings_RequestParameter" aria-controls="GetDoNotDisturbStatusSettings_RequestParameter" role="tab" data-toggle="tab">Request Parameter</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbStatusSettings_DirectForm" aria-controls="GetDoNotDisturbStatusSettings_DirectForm" role="tab" data-toggle="tab">Direct Form</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbStatusSettings_JSONResponseSample" aria-controls="GetDoNotDisturbStatusSettings_JSONResponseSample" role="tab" data-toggle="tab">JSON Resp</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbStatusSettings_ResponseParameters" aria-controls="GetDoNotDisturbStatusSettings_ResponseParameters" role="tab" data-toggle="tab">Response</a></li>
-			  </ul>
-
-			<div class="tab-content">
-			  <div role="tabpanel" class="tab-pane active" id="GetDoNotDisturbStatusSettings_RequestParameter">
-			  <table class="table table-striped table-responsive">
-						<thead>
-						<tr>
-						  <th align="left">Parameter</th>
-						  <th align="left">Description</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-						  <td class="notranslate" align="left">userName</td>
-						  <td align="left">This should be email address which Users used to login to their account when they originally signed-up with.</td>
-						</tr>
-						<tr>
-						  <td class="notranslate" align="left">token</td>
-						  <td align="left">The credential for identifying the account. This is the token that was sent by Ushur as part of login response</td>
-						</tr>
-						</tbody>
-				</table>
-			  </div>
-
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbStatusSettings_DirectForm">
-			  	<p>A GET Form is shown for a login:</p>
-        {{-- <pre class="language-http copytoclipboard"><code>https://community.ushur.me/rest/doNotDisturb/getStatus?userName={{email}}&token={{token}}</code></pre> --}}
-        
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbStatusSettings_JSONResponseSample">
-			  	<pre class="language-http copytoclipboard"><code>{
-  "status": "success",
-  "respCode": 200,
-  "data": {
-      "dndDateStatus": "Y",
-      "dndTimeStatus": "Y"
-    },
-    "infoText": "DND status retrieved successfully."
-}</code></pre>
-<label>Failure</label>
-<pre class="language-http copytoclipboard"><code>{
-  "status": "failure",
-  "respCode": "404",
-  "data":null,
-  "infoText": "Account not found",
-}</code></pre>
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbStatusSettings_ResponseParameters">
-			  	<table class="table table-striped table-responsive">
-	                <thead>
-		                <tr>
-		                  <th align="left">Parameter</th>
-		                  <th align="left">Description</th>
-		                </tr>
-	                </thead>
-	                <tbody>
-		                <tr>
-		                  <td class="notranslate" align="left">status</td>
-		                  <td align="left">A textual indication of success or failure.</td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">respCode</td>
-		                  <td align="left">An integer code for programmatic purposes. 200 denotes success and 4xx denotes failure.</td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">data</td>
-		                  <td align="left">A JSON Array of date status and time status.  A response can be a null array when there are no DND Settings. </td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">infoText</td>
-		                  <td align="left">A description of the response for the submitted request.</td>
-		                </tr>
-	                </tbody>
-                </table>
-			  </div>
-			</div>
-				
-			</div>
-		</div>
-		<!--// End of Get Do Not Disturb Status Settings  -->
-
-
-		<!-- Get Do Not Disturb Settings  -->
-		<div id="GetDoNotDisturbSettings" class="doc-content no-padding">
-			<div class="col-sm-5 description equal-item">
-					<h3 class="sub-title">Get DoNotDisturb Settings</h3>
-					<p>This is to retrieve the DoNotDisturb settings for the Ushur Account. An Account can represent an enterprise.</p>					
-			</div>
-			<div class="col-sm-7 docs equal-item">
-			<ul class="nav nav-tabs" role="tablist">
-			    <li role="presentation" class="active"><a href="#GetDoNotDisturbSettings_RequestParameter" aria-controls="GetDoNotDisturbSettings_RequestParameter" role="tab" data-toggle="tab">Request Parameter</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbSettings_DirectForm" aria-controls="GetDoNotDisturbSettings_DirectForm" role="tab" data-toggle="tab">Direct Form</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbSettings_JSONResponseSample" aria-controls="GetDoNotDisturbSettings_JSONResponseSample" role="tab" data-toggle="tab">JSON Resp</a></li>
-			    <li role="presentation"><a href="#GetDoNotDisturbSettings_ResponseParameters" aria-controls="GetDoNotDisturbSettings_ResponseParameters" role="tab" data-toggle="tab">Response</a></li>
-			  </ul>
-
-			<div class="tab-content">
-			  <div role="tabpanel" class="tab-pane active" id="GetDoNotDisturbSettings_RequestParameter">
-			  <table class="table table-striped table-responsive">
-						<thead>
-						<tr>
-						  <th align="left">Parameter</th>
-						  <th align="left">Description</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-						  <td class="notranslate" align="left">userName</td>
-						  <td align="left">This should be email address which Users used to login to their account when they originally signed-up with.</td>
-						</tr>
-						<tr>
-						  <td class="notranslate" align="left">token</td>
-						  <td align="left">The credential for identifying the account. This is the token that was sent by Ushur as part of login response</td>
-						</tr>
-						</tbody>
-				</table>
-			  </div>
-
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbSettings_DirectForm">
-			  	<p>A GET Form is shown for a login:</p>
-				{{-- <pre class="language-http copytoclipboard"><code>https://community.ushur.me/rest/doNotDisturb/get?userName={{email}}&token={{token}}</code></pre> --}}
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbSettings_JSONResponseSample">
-			  	<pre class="language-http copytoclipboard"><code>{
-  "status": "success",
-  "respCode": 200,
-  "data": [
-    {
-      "time": "20:30,6:00",
-      "day": "mon,tue"
-    },
-    {
-      "time": "22:00,6:00",
-      "day": "weekends"
-    }
-  ],
-  "infoText": "DND schedule retrieved successfully."
-}</code></pre>
-<label>Failure</label>
-<pre class="language-http copytoclipboard"><code>{
-  "status": "failure",
-  "respCode": "404",
-  "data":null,
-  "infoText": "Account not found",
-}</code></pre>
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="GetDoNotDisturbSettings_ResponseParameters">
-			  	<table class="table table-striped table-responsive">
-	                <thead>
-		                <tr>
-		                  <th align="left">Parameter</th>
-		                  <th align="left">Description</th>
-		                </tr>
-	                </thead>
-	                <tbody>
-		                <tr>
-		                  <td class="notranslate" align="left">status</td>
-		                  <td align="left">A textual indication of success or failure.</td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">respCode</td>
-		                  <td align="left">An integer code for programmatic purposes. 200 denotes success and 4xx denotes failure.</td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">data</td>
-		                  <td align="left">A JSON Array of time and day.  A response can be a null array when there are no DND Settings. The time is in 24 hour format.  Day values can be weekdays, weekends, list of days or a single day.</td>
-		                </tr>
-		                <tr>
-		                  <td class="notranslate" align="left">infoText</td>
-		                  <td align="left">A description of the response for the submitted request.</td>
-		                </tr>
-	                </tbody>
-                </table>
-			  </div>
-			</div>
-				
-			</div>
-		</div>
-		<!--// End of Get Do Not Disturb Settings  -->
-
+ <!-- Signin starts -->
+ @foreach($category as $cat)
+    @isset($cat->post)
+      @foreach($cat->post as $key=>$post)
+      <div id="signIn" class="doc-content no-padding">
+        <div class="col-sm-5 description equal-item">
+          @if($key==0)
+          <h2 class="desc-title">Account Operations</h2>
+          @endif
+            <h3 class="sub-title">{{$post->title}}</h3>
+            <p>{!! html_entity_decode($post->description) !!}</p>
+        </div>
+        <div class="col-sm-7 docs equal-item">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#signIn_RequestParameter" role="tab" data-toggle="tab">Request Parameter</a></li>
+        <!--    <li role="presentation"><a href="#signIn_RequestSample1" aria-controls="signIn_RequestSample1" role="tab" data-toggle="tab">GET Sample</a></li>  -->
+             <li role="presentation"><a href="#signIn_RequestSample2" aria-controls="signIn_RequestSample2" role="tab" data-toggle="tab">POST Sample</a></li>
+            <li role="presentation"><a href="#signIn_JSONResponseSample" aria-controls="signIn_JSONResponseSample" role="tab" data-toggle="tab">JSON Resp</a></li>
+            <li role="presentation"><a href="#signIn_ResponseParameters" aria-controls="signIn_ResponseParameters" role="tab" data-toggle="tab">Response</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="signIn_RequestParameter">
+            <table class="table table-striped table-responsive">
+              <thead>
+                <tr>
+                  <th align="left">Parameter</th>
+                  <th align="left">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="notranslate" align="left">email</td>
+                  <td align="left">Users can login to their account using this email identifier they originally signed-up with.</td>
+                </tr>
+                <tr>
+                  <td class="notranslate" align="left">password</td>
+                  <td align="left">Password for the account.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <!--    <div role="tabpanel" class="tab-pane" id="signIn_RequestSample1">
+              <pre class="language-http copytoclipboard"><code>Method: GET
+          URL:  https://community.ushur.me/rest/login?email=ushurtester@gmail.com&password=testushur</code></pre>
+                    </div> -->
+                    <div role="tabpanel" class="tab-pane" id="signIn_RequestSample2">
+                      <pre class="language-http copytoclipboard"><code>Method: POST
+          URL:  https://community.ushur.me/rest/login
+          Content-Type: application/json
+      
+          {
+          "email":"ushurtester@gmail.com",
+          "password":"testushur"
+          }
+          </code></pre>
+      
+            </div>
+            <div role="tabpanel" class="tab-pane" id="signIn_JSONResponseSample">
+            <label>Success</label>
+              <pre class="language-http copytoclipboard"><code>{
+          "status": "success",
+          "respCode": "200",
+          "tokenId": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiYmQzMjIyNy0zMTY0LTRmNGEtYmNjYy1jMzdjZTg1MjlmMzYiLCJpYXQiOjE1NTkyNzYxNDEsInN1YiI6IkFjY291bnRBdXRoIiwiaXNzIjoiVVNIVVIiLCJhY2NvdW50RW5hYmxlZCI6IlkiLCJ1c2VyQWNjb3VudCI6IkdVUlVSQUpBLktPU0lHSUBVU0hVUi5DT00iLCJleHAiOjE1NTkyODMzNDF9.m_AQBIoUPdLMqrrBZ2S7pTAnsrkDLVpAGyLif2dQR9M",
+          "emailId": "ushurtester@gmail.com",
+          "nickName": "test4ushur",
+          "tokenLeaseTime": "120",
+          "tokenRenewThreshold": "3"
+          
+          }
+          </code></pre>
+      
+        <label>Failure (Invalid Email Address)</label>
+        <pre class="language-http copytoclipboard"><code>{
+          "status": "failure",
+          "respCode": "403",
+          "data": null,
+          "infoText": "Account not found",
+        }</code></pre>
+      
+        <label>Failure (Invalid Password)</label>
+        <pre class="language-http copytoclipboard"><code>{
+          "status": "failure",
+          "respCode": "200",
+          "infoText": "You are not a valid user",
+          "emailId": "ushurtester@gmail.com"
+        }</code></pre>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="signIn_ResponseParameters">
+                    <table class="table table-striped table-responsive">
+                            <thead>
+                              <tr>
+                                <th align="left">Parameter</th>
+                                <th align="left">Description</th>
+                              </tr>
+                            </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="notranslate" align="left">status</td>
+                                  <td align="left">A textual indication of success or failure.</td>
+                                </tr>
+                                <tr>
+                                  <td class="notranslate" align="left">respCode</td>
+                                  <td align="left">An integer code for programmatic purposes. 200 denotes success and 4xx denotes failure. See <a href="#responseCodes">here</a> for all codes.</td>
+                                </tr>
+                                <tr>
+                                  <td class="notranslate" align="left">tokenId</td>
+                                  <td align="left">For any API operation other than the signup, the caller is expected to pass the credential which is this token Id that is returned upon a successful login submission.  This tokenId must be sent in all API requests for other services. 
+                                    <br><br>
+                                    For security reasons, Ushur has some mechanisms whereby it can internally regenerate this tokenId which is unique in the system. If an API request fails, the API caller is required to invoke the Login API, retrieve the updated tokenId from the response and then use for subsequent API services.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="notranslate" align="left">emailId</td>
+                                  <td align="left">The submitted email identifier is returned back for correlation purposes. If there are multiple outstanding requests, this helps the caller of the APIs to correlate requests and responses.</td>
+                                </tr>
+                                <tr>
+                                  <td class="notranslate" align="left">nickName</td>
+                                  <td align="left">The nick Name in the account is returned back.</td>
+                                </tr>
+                        <tr>
+                                  <td class="notranslate" align="left">tokenLeaseTime</td>
+                                  <td align="left">The lease duration is time to live value: the time in seconds for which the token is valid</td>
+                                </tr>
+                        <tr>
+                                  <td class="notranslate" align="left">tokenRenewThreshold</td>
+                                  <td align="left">The maximum number of times the token can be renewed</td>
+                                </tr>
+                              </tbody>
+                          </table> 
+                  </div>
+                </div>
+                  
+        </div>
+      </div>
+      @endforeach
+    @endisset
+ @endforeach
 
 		<!-- Set DoNotDisturb Status Settings  -->
 		<div id="SetDoNotDisturbStatusSettings" class="doc-content no-padding">

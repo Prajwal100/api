@@ -32,4 +32,12 @@ class Category extends Model
     public function getChildByParentId($id){
         return $this->where('parent_id',$id)->orderBy('title','ASC')->pluck('title','id');
     }
+
+    public function post(){
+        return $this->hasMany('App\Models\Post','cat_id','id');
+    }
+
+    public function getCategoryWithAttr(){
+        return $this->with('post')->where('status','active')->get();
+    }
 }

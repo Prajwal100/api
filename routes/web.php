@@ -47,8 +47,11 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
 
     // Tab section
     Route::resource('/tab','TabController');
-    // Type Section
-    Route::resource('/type','TypeController');
+
+    //ajax get tab detail
+    Route::get('/ajaxTab', 'TabController@ajaxTab')->name('postTab.ajaxTab');
+    Route::post('/postTabManager/save', 'PostController@postTabManager')->name('postTabManager.save');
 });
 
 // ----------------------Back End Routes ends----------------------//
+

@@ -22,10 +22,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th ><button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete All Selected"><i class="fa fa-trash font-14"></i></buttton></th>
                                     <th>Title</th>
-                                    <th>Is parent</th>
-                                    <th>Parent Category</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -37,23 +34,8 @@
                                         $parent_cats=DB::table('categories')->select('title')->where('id',$category_data->parent_id)->get();
                                     ?>
                                     <tr>
-                                        <td>
-                                            <label class="ui-checkbox">
-                                                <input type="checkbox" name='muldel[]' value={{$category_data->id}}>
-                                                <span class="input-span"></span>
-                                            </label>
-                                        </td>
-                                        <td>{{$category_data->title}}</td>
-                                        <td>
-                                           {{($category_data->is_parent==1)? 'Yes' : 'No'}}
-                                        </td>
-                                        <td>
-                                            
-                                            @foreach($parent_cats as $parent_cat)
-                                                {{$parent_cat->title}}
-                                            @endforeach
-                                         </td>
 
+                                        <td>{{$category_data->title}}</td>
                                         <td>
                                             @if($category_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

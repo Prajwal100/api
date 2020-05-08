@@ -147,4 +147,10 @@ class TabController extends Controller
         }
         return redirect()->route('tab.index');
     }
+
+    public function ajaxTab(Request $request)
+    {
+        $tab = \App\Models\Tab::find($request->id);
+        return $tab->type;
+    }
 }

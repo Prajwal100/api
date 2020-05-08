@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Post;
 class HomeController extends Controller
 {
     /**
@@ -11,9 +11,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $post=null;
+    public function __construct(Post $post)
     {
         $this->middleware('auth');
+        $this->post=$post;
     }
 
     /**
@@ -27,6 +29,7 @@ class HomeController extends Controller
     }
 
     public function admin(){
-        return view('backend.index');
+        $all_posts=$this->post->getAllPost();
+        return view('backend.index')->with('post',$all_posts);
     }
 }

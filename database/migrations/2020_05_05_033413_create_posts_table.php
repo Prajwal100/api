@@ -16,13 +16,14 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('tab_ids');
             $table->string('slug')->unique();
             $table->integer('cat_id')->unsigned()->nullable();
-            $table->integer('child_cat_id')->unsigned()->nullable();
+            // $table->integer('child_cat_id')->unsigned()->nullable();
             $table->text('description');
             $table->enum('status',['active','inactive'])->default('active');
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('SET NULL');
-            $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('CASCADE');
+            // $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

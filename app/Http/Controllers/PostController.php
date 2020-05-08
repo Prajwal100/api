@@ -42,12 +42,12 @@ class PostController extends Controller
     public function create()
     {
         $parent_cats=$this->category->get();
-        // $tabs=$this->tab->get();
+        $tabs=$this->tab->get();
         // $child_cats=$this->category->where('is_parent',0)->get();
         // dd($child_cats);
         // dd($parent_cats);
         return view('backend.posts.create')
-        // ->with('tabs',$tabs)
+        ->with('tabs',$tabs)
         ->with('parent_cats',$parent_cats);
     }
 
@@ -60,19 +60,30 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $ruls=$this->post->getRules();
-        
-        $data=$request->all();
-        $data['slug']=$this->category->getSlug($request->title);
-        // dd($data);
-        $this->post->fill($data);
-        $status=$this->post->save();
-        if($status){
-            request()->session()->flash('success','Post successfully added');
-        }
-        else{
-            request()->session()->flash('error','Error while adding post');
-        }
+        $slug=$this->category->getSlug($request->title);
+        $data = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'slug' => $slug,
+            'status' => $request->status,
+            'cat_id' => $request->cat_id,
+            'tab_ids' => json_encode($request->tab_ids)
+        ];
+        \App\Models\Post::create($data);
+        request()->session()->flash('success','Post successfully added');
         return redirect()->route('post.index');
+        
+        // $data=$request->all();
+        // // dd($data);
+        // $this->post->fill($data);
+        // $status=$this->post->save();
+        // if($status){
+        //     request()->session()->flash('success','Post successfully added');
+        // }
+        // else{
+        //     request()->session()->flash('error','Error while adding post');
+        // }
+        // return redirect()->route('post.index');
     }
 
     /**
@@ -83,7 +94,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = \App\Models\Post::find($id);
+        $tab_ids = json_decode($post->tab_ids);
+        $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->get();
+        return view('backend.posts.view')->with('post', $post)->with('tabs', $tabs);
+
     }
 
     /**
@@ -99,10 +114,10 @@ class PostController extends Controller
             request()->session()->flash('error','Post not found');
             return redirect()->route('post.index');
         }
-        $parent_cats=$this->category->where('is_parent',1)->get();
-        $child_cats=$this->category->where('is_parent',0)->get();
+        $parent_cats=$this->category->get();
+        // $child_cats=$this->category->where('is_parent',0)->get();
         return view('backend.posts.edit')
-        ->with('child_cats',$child_cats)
+        // ->with('child_cats',$child_cats)
         ->with('parent_cats',$parent_cats)
         ->with('post_data',$this->post);
     }
@@ -214,5 +229,21 @@ class PostController extends Controller
         else{
             return response()->json(['status'=>true,'msg'=>'','data'=>$Tab_type]);
         }
+    }
+
+    public function postTabManager(Request $request)
+    {
+        $data = [
+            'post_id' => $request->post_id,
+            'tab_id' => $request->tab_id,
+            'tab_type' => $request->tab_type,
+            'parameter' => $request->parameter,
+            'description' => $request->description,
+            'title' => $request->title,
+            'snippet' => json_encode($request->snippet),
+        ];
+        \App\Models\PostTab::create($data);
+        request()->session()->flash('success','Successfully Added');
+        return redirect()->back();
     }
 }

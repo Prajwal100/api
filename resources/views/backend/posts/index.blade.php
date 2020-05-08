@@ -10,6 +10,7 @@
                     @include('backend.layouts.notification')
                 </div>
             </div>
+           
             <div class="ibox-head">
                 <div class="ibox-title">Post List</div>
                 <div class="ibox-title float-right">
@@ -48,7 +49,7 @@
                                         </td>
                                         <td>{{$post_data->title}}</td>
                                         <td>{{$post_data->cat_info->title}}</td>
-                                        <td><a href="{{route('post-tab-manager')}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
+                                        <td><a href="{{route('post.show', $post_data->id)}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
                                         <td>
                                             @if($post_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

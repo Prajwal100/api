@@ -70,65 +70,62 @@
 
 @section('styles')
     <link href="{{asset('/summernote/summernote.min.css')}}" rel="stylesheet">
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endsection
 @section('scripts')
     <script src="{{asset('/summernote/summernote.min.js')}}"></script>
+
+
     <script>
-         
-         $('#description').summernote(
+         $('#description').summernote({
              height:150,
              placeholder:'Description'
-         );
-         
+         });
     </script>
-      <script>
-       var  child_cat_id='{{$post_data->child_cat_id}}';
-       // alert(child_cat_id);
-       $('#cat_id').change(function(){
-           var cat_id=$(this).val();
+    <script>
+        $('#cat_id').change(function(){
+            var cat_id=$(this).val();
+            // alert(cat_id);
+            if(cat_id !=null){
+                // ajax call
+                $.ajax({
+                    url:"/admin/category/"+cat_id+"/child",
+                    type:"POST",
+                    data:{
+                        // _token:token,
+                        // parameter:value,
+                        '_token': $('input[name=_token]').val(),
+                    },
+                    success:function(response){
+                        console.log(response);
 
-           if(cat_id !=null){
-               // ajax call
-               $.ajax({
-                   url:"/admin/category/"+cat_id+"/child",
-                   type:"POST",
-                   data:{
-                       _token:"{{csrf_token()}}"
-                   },
-                   success:function(response){
-                       if(typeof(response)!='object'){
-                           response=$.parseJSON(response);
-                       }
-                       var html_option="<option value=''>--Select any one--</option>";
-                       if(response.status){
-                           var data=response.data;
-                           if(response.data){
-                               $('#child_cat_div').removeClass('d-none');
-                               $.each(data,function(id,title){
-                                   html_option += "<option value='"+id+"' "+(child_cat_id==id ? 'selected ' : '')+">"+title+"</option>";
-                               });
-                           }
-                           else{
-                               console.log('no response data');
-                           }
-                       }
-                       else{
-                           $('#child_cat_div').addClass('d-none');
-                       }
-                       $('#child_cat_id').html(html_option);
+                        if(typeof(response)!='object'){
+                            response=$.parseJSON(response);
+                        }
+                        var html_option="<option value=''>--Select any one--</option>";
+                        if(response.status){
+                            var data=response.data;
+                            if(response.data){
+                                $('#child_cat_div').removeClass('d-none');
+                                $.each(data,function(id,title){
+                                    html_option += "<option value='"+id+"'>"+title+"</option>";
+                                });
+                            }
+                            else{
+                                console.log('no response data');
+                            }
+                        }
+                        else{
+                            $('#child_cat_div').addClass('d-none');
+                        }
+                        $('#child_cat_id').html(html_option);
 
-                   }
-               });
-           }
-           else{
+                    }
+                });
+            }
+            else{
 
-           }
-
-       });
-       if(child_cat_id!=null){
-           $('#cat_id').change();
-       }
-   </script>
-    
+            }
+        })
+    </script>
 @endsection

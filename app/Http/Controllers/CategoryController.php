@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $parent_cats=$this->category->where('is_parent',1)->pluck('title','id');
+        $parent_cats=$this->category->pluck('title','id');
         return view('backend.category.create')->with('parent_cats',$parent_cats);
     }
 
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
         }
-        $parent_cats=$this->category->where('parent_id',1)->get();
+        $parent_cats=$this->category->get();
         return view('backend.category.edit')
         ->with('parent_cats',$parent_cats)
         ->with('category_data',$this->category);
