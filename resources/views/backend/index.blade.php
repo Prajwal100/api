@@ -12,7 +12,7 @@
                             $total_cats=DB::table('categories')->where('status','active')->count();
                         ?>
                         <h2 class="m-b-5 font-strong">{{$total_cats}}</h2>
-                        <div class="m-b-5">TOTAL CATEGORY</div><i class="ti-shopping-cart widget-stat-icon"></i>
+                        <div class="m-b-5">TOTAL CATEGORY</div><i class="fa fa-sitemap widget-stat-icon" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                             $total_posts=DB::table('posts')->where('status','active')->count();
                         ?>
                         <h2 class="m-b-5 font-strong">{{$total_posts}}</h2>
-                        <div class="m-b-5">TOTAL POSTS</div><i class="ti-bar-chart widget-stat-icon"></i>
+                        <div class="m-b-5">TOTAL POSTS</div><i class="fa fa-clone widget-stat-icon"></i>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                             $total_tabs=DB::table('tabs')->where('status','active')->count();
                         ?>
                         <h2 class="m-b-5 font-strong">{{$total_tabs}}</h2>
-                        <div class="m-b-5">TOTAL INCOME</div><i class="fa fa-money widget-stat-icon"></i>
+                        <div class="m-b-5">TOTAL TABS</div><i class="fa fa-th-large widget-stat-icon"></i>
                     </div>
                 </div>
             </div>

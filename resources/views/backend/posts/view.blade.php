@@ -34,41 +34,125 @@
                         </div> 
                     </div>          
                     <div class="tab-content">
-                        @foreach($tabs as $tab)
-                        @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
-                        @foreach($contents as $content)
-                        @endforeach
-                        <div class="tab-pane" id="tabBtn{{$tab->id}}">
-                            @if($content->id)
+                        @foreach($tabs as $k=>$tab)
+                        <div class="tab-pane @if($k==0) active @endif" id="tabBtn{{$tab->id}}">
                             @if($tab->type=='table')
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Parameter</th>
-                                    <th>Description</th>
-                                </tr>
-                                @foreach($contents as $content)
-                                <tr>
-                                    <td>{{$content->parameter}}</td>
-                                    <td>{{$content->description}}</td>
-                                </tr>
-                                @endforeach
-                            </table>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
+                                    @foreach($contents as $content)
+                                    <tr>
+                                        <td>{{$content->parameter}}</td>
+                                        <td>{{$content->description}}</td>
+                                        <td>
+                                            <form action="{{route('post.tab.delete', $content->id)}}" method="post">
+                                                {{csrf_field()}}
+                                                 {{method_field('DELETE')}}
+                                                <button type="button" class="btn btn-xs btn-warning" onclick="openPostTabTableTypeModel({{$content->id}})"><i class="fa fa-edit"></i></button>
+                                                <button type="submit" class=" btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                            
+                                        </td>
+                                    </tr>
+                                    <div class="modal" tabindex="-1" role="dialog" id="postTabEditModel{{$content->id}}">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title">Post Tab Manager</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form action="{{route('post-tab-edit', $content->id)}}" method="post">
+                                          <div class="modal-body">
+                                                {{csrf_field()}}
+                                                 {{method_field('PUT')}}
+                                                <input type="hidden" name="post_id" value="{{$content->post_id}}">
+                                                <input type="hidden" name="tab_id" value="{{$content->tab_id}}">
+                                                <input type="hidden" name="tab_type" value="{{$content->tab_type}}">
+                                                <div class="form-group">
+                                                    <label>Parameter</label>
+                                                    <input type="text" name="parameter" class="form-control" value="{{$content->parameter}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <textarea name="description" id="description" rows="5" class="form-control">{{$content->description}}</textarea>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    @endforeach
+                                </table>
                             @endif
                             @if($tab->type=='snippet')
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Code</th>
-                                </tr>
-                                @foreach($contents as $content)
-                                <tr>
-                                    <td>{{$content->title}}</td>
-                                    <td><pre>{{json_decode($content->snippet)}}</pre></td>
-                                </tr>
-                                @endforeach
-                            </table>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Code</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
+                                    @foreach($contents as $content)
+                                    <tr>
+                                        <td>{{$content->title}}</td>
+                                        <td><pre>{{json_decode($content->snippet)}}</pre></td>
+                                        <td>
+                                            <form action="{{route('post.tab.delete', $content->id)}}" method="post">
+                                                {{csrf_field()}}
+                                                 {{method_field('DELETE')}}
+                                                 <button type="button" class="btn btn-xs btn-warning" onclick="openPostTabCodeTypeModel({{$content->id}})"><i class="fa fa-edit"></i></button>
+                                                <button type="submit" class=" btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                            
+                                        </td>
+                                    </tr>
+                                    <div class="modal" tabindex="-1" role="dialog" id="postTabEditModel{{$content->id}}">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title">Post Tab Manager</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form action="{{route('post-tab-edit', $content->id)}}" method="post">
+                                          <div class="modal-body">
+                                                {{csrf_field()}}
+                                                 {{method_field('PUT')}}
+                                                <input type="hidden" name="post_id" value="{{$content->post_id}}">
+                                                <input type="hidden" name="tab_id" value="{{$content->tab_id}}">
+                                                <input type="hidden" name="tab_type" value="{{$content->tab_type}}">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" name="title" class="form-control" value="{{$content->title}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Code</label>
+                                                    <textarea name="snippet" id="snippet" rows="5" class="form-control">{{json_decode($content->snippet)}}</textarea>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    @endforeach
+                                </table>
                             @endif
-                            @endif
+                            
                         </div>
                         @endforeach
                     </div>
@@ -170,5 +254,14 @@
         });
         }) 
     })
+
+    function openPostTabTableTypeModel(id)
+    {
+        $('#postTabEditModel'+id).modal('show');
+    }
+    function openPostTabCodeTypeModel(id)
+    {
+        $('#postTabEditModel'+id).modal('show');
+    }
 </script>
 @endsection

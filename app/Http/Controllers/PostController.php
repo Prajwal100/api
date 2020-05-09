@@ -43,9 +43,7 @@ class PostController extends Controller
     {
         $parent_cats=$this->category->get();
         $tabs=$this->tab->get();
-        // $child_cats=$this->category->where('is_parent',0)->get();
-        // dd($child_cats);
-        // dd($parent_cats);
+        
         return view('backend.posts.create')
         ->with('tabs',$tabs)
         ->with('parent_cats',$parent_cats);
@@ -114,10 +112,14 @@ class PostController extends Controller
             request()->session()->flash('error','Post not found');
             return redirect()->route('post.index');
         }
+        $tab_ids = json_decode($this->post->tab_ids);
+        $tabs=$this->tab->get();
+
         $parent_cats=$this->category->get();
         // $child_cats=$this->category->where('is_parent',0)->get();
         return view('backend.posts.edit')
-        // ->with('child_cats',$child_cats)
+        ->with('tabs',$tabs)
+        ->with('tab_ids',$tab_ids)
         ->with('parent_cats',$parent_cats)
         ->with('post_data',$this->post);
     }
@@ -131,17 +133,29 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->post=$this->post->find($id);
-        if(!$this->post){
-            request()->session()->flash('error','Post not found');
-            return redirect()->route('post.index');
-        }
+        // $this->post=$this->post->find($id);
+        // if(!$this->post){
+        //     request()->session()->flash('error','Post not found');
+        //     return redirect()->route('post.index');
+        // }
         $ruls=$this->post->getRules();
         
-        $data=$request->all();
-        // dd($data);
-        $this->post->fill($data);
-        $status=$this->post->save();
+        // $data=$request->all();
+        // // dd($data);
+        // $this->post->fill($data);
+
+        $slug=$this->category->getSlug($request->title);
+        $data = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'slug' => $slug,
+            'status' => $request->status,
+            'cat_id' => $request->cat_id,
+            'tab_ids' => json_encode($request->tab_ids)
+        ];
+        
+        // $status=$this->post->save();
+        $status = \App\Models\Post::find($id)->update($data);
         if($status){
             request()->session()->flash('success','Post successfully updated');
         }
@@ -174,45 +188,31 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
-    public function postTab(){
-        $all_post_tab=$this->posttab->get();
-        return view('backend.posts.post-tab.post-tab-index')->with('post_tab',$all_post_tab);
-    }
+    // public function postTab(){
+    //     $all_post_tab=$this->posttab->get();
+    //     return view('backend.posts.post-tab.post-tab-index')->with('post_tab',$all_post_tab);
+    // }
 
-    public function postCreate(){
-        $tabs=$this->tab->get();
-        return view('backend.posts.post-tab.post-tab-create')->with('tabs',$tabs);
-    }
+    // public function postCreate(){
+    //     $tabs=$this->tab->get();
+    //     return view('backend.posts.post-tab.post-tab-create')->with('tabs',$tabs);
+    // }
 
-    public function postStore(Request $request){
-        // dd($request->all());
-        $data=$request->all();
-        $this->posttab->fill($data);
-        $status=$this->posttab->save();
-        if($status){
-            request()->session()->flash('success','Successfully added');
-        }
-        else{
-            request()->session()->flash('error','Error while adding');
-        }
-        return redirect()->route('post-tab-manager');
-    }
+    // public function postStore(Request $request){
+    //     // dd($request->all());
+    //     $data=$request->all();
+    //     $this->posttab->fill($data);
+    //     $status=$this->posttab->save();
+    //     if($status){
+    //         request()->session()->flash('success','Successfully added');
+    //     }
+    //     else{
+    //         request()->session()->flash('error','Error while adding');
+    //     }
+    //     return redirect()->route('post-tab-manager');
+    // }
 
-    public function postDelete($id){
-        $this->posttab=$this->posttab->find($id);
-        if(!$this->posttab){
-            request()->session()->flash('error','Not found');
-            return redirect()->route('post-tab-manager');
-        }
-        $del=$this->posttab->delete();
-        if($del){
-            request()->session()->flash('success','Successfully deleted');
-        }
-        else{
-            request()->session()->flash('error','Error while deleting');
-        }
-        return redirect()->route('post-tab-manager');
-    }
+
 
 
     public function getTabType(Request $request){
@@ -244,6 +244,36 @@ class PostController extends Controller
         ];
         \App\Models\PostTab::create($data);
         request()->session()->flash('success','Successfully Added');
+        return redirect()->back();
+    }
+    public function postDelete($id){
+        $this->posttab=$this->posttab->find($id);
+        if(!$this->posttab){
+            request()->session()->flash('error','Not found');
+            return redirect()->back();
+        }
+        $del=$this->posttab->delete();
+        if($del){
+            request()->session()->flash('success','Successfully deleted');
+        }
+        else{
+            request()->session()->flash('error','Error while deleting');
+        }
+        return redirect()->back();
+    }
+    public function postTabEdit($id, Request $request)
+    {
+        $data = [
+            'post_id' => $request->post_id,
+            'tab_id' => $request->tab_id,
+            'tab_type' => $request->tab_type,
+            'parameter' => $request->parameter,
+            'description' => $request->description,
+            'title' => $request->title,
+            'snippet' => json_encode($request->snippet),
+        ];
+        \App\Models\PostTab::find($id)->update($data);
+        request()->session()->flash('success','Successfully Updated');
         return redirect()->back();
     }
 }

@@ -10,5 +10,5 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend/css/prism.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}">
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="{{asset('frontend/favicon.ico')}}" type="image/x-icon" >
 </head>

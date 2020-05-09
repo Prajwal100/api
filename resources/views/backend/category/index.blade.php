@@ -56,8 +56,12 @@
                                     @endforeach
                               
                                @endif
+
+                              
                             </tbody>
+                           
                         </table>
+                        {{$category->links()}}
                     {{-- </form> --}}
                     
                 </div>

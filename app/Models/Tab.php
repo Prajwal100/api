@@ -12,4 +12,11 @@ class Tab extends Model
         // debugger();
         return $this->where('id',$title)->pluck('type','id');
     }
+
+    public static function getTabs($tab_ids)
+    {
+    	$ids = json_decode($tab_ids);
+    	$data = Tab::whereIn('id', $ids)->get();
+    	return $data;
+    }
 }

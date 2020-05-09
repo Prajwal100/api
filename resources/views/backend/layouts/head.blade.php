@@ -12,6 +12,8 @@
     <link href="{{asset('backend/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css')}}" rel="stylesheet" />
     <!-- THEME STYLES-->
     <link href="{{asset('backend/assets/css/main.min.css')}}" rel="stylesheet" />
+	<link rel="shortcut icon" href="{{asset('frontend/favicon.ico')}}" type="image/x-icon" >
+
     @yield('styles')
     <!-- PAGE LEVEL STYLES-->
 </head>

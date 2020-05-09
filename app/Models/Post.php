@@ -28,7 +28,16 @@ class Post extends Model
         return $this->hasOne('App\Models\Category','id','cat_id');
     }
     public function getAllPost(){
-        return $this->with('cat_info')->orderBy('id','DESC')->get();
+        return $this->with('cat_info')->orderBy('id','ASC')->paginate(20);
+    }
+    public static function getFirstChildSlug($cat_id)
+    {
+        $data = Post::where('cat_id', $cat_id)->orderBy('id')->first();
+        if($data)
+        {
+            return $data->slug;
+        }
+        return '';
     }
 
     

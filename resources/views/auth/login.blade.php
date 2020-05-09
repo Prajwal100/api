@@ -55,7 +55,6 @@
                 <label class="ui-checkbox ui-checkbox-info">
                     <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                     <span class="input-span"></span>Remember me</label>
-                <a href="{{ route('password.request') }}">Forgot password?</a>
             </div>
             <div class="form-group">
                 <button class="btn btn-info btn-block" type="submit">Login</button>

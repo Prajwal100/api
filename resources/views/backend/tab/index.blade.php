@@ -65,6 +65,8 @@
                                @endif
                             </tbody>
                         </table>
+
+                        {{$tab->links()}}
                     {{-- </form> --}}
                     
                 </div>

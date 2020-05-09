@@ -18,7 +18,7 @@ class TabController extends Controller
      */
     public function index()
     {
-        $all_tabs=$this->tab->get();
+        $all_tabs=$this->tab->paginate(20);
         return view('backend.tab.index')->with('tab',$all_tabs);
     }
 

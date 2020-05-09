@@ -19,9 +19,9 @@ class CreatePostTabsTable extends Migration
             $table->integer('tab_id')->unsigned()->nullable();
             $table->string('tab_type')->nullable();
             $table->string('parameter')->nullable();
-            $table->string('description')->nullable();
-            $table->string('title')->nullable();
-            $table->string('snippet',1000)->nullable();
+            $table->string('description', 2000)->nullable();
+            $table->string('title', 500)->nullable();
+            $table->string('snippet',2000)->nullable();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('SET NULL');
             $table->foreign('tab_id')->references('id')->on('tabs')->onDelete('SET NULL');
             $table->timestamps();

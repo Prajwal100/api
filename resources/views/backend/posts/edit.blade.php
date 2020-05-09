@@ -43,6 +43,22 @@
                             
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <h4>Select Required Tab</h4>
+                        <div class="row">
+                            @foreach($tabs as $tab)
+                            <div class="col-md-2">
+                                @if(in_array($tab->id, $tab_ids))
+                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"checked> {{$tab->title}}
+                                @else
+                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"> {{$tab->title}}
+                                @endif
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">

@@ -38,9 +38,11 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     Route::resource('/post','PostController');
     Route::post('category/{id}/child','CategoryController@getChildByParent');
     // Post Tab manager
-    Route::get('/post-tab','PostController@postTab')->name('post-tab-manager');
-    Route::get('/post-tab/create','PostController@postCreate')->name('post.tab.create');
-    Route::post('/post-tab/store','PostController@postStore')->name('post.tab.store');
+    // Route::get('/post-tab','PostController@postTab')->name('post-tab-manager');
+    // Route::get('/post-tab/create','PostController@postCreate')->name('post.tab.create');
+    // Route::post('/post-tab/store','PostController@postStore')->name('post.tab.store');
+    
+    Route::put('/post-tab/{id}/edit','PostController@postTabEdit')->name('post-tab-edit');
     Route::delete('/post-tab/delete/{id}','PostController@postDelete')->name('post.tab.delete');
 
     Route::post('/post-tab/{id}/child','PostController@getTabType');
@@ -54,4 +56,3 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
 });
 
 // ----------------------Back End Routes ends----------------------//
-

@@ -68,9 +68,14 @@
                                     </tr>
                                    
                                     @endforeach
+                                    
                                @endif
+
                             </tbody>
                         </table>
+                        {{$post->links()}}
+
+                        
                     {{-- </form> --}}
                     
                 </div>

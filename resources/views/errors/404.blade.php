@@ -1,0 +1,1 @@
+<h1 style="color:red; text-align:center;margin-top:10%;">404 page not found !</h1>
