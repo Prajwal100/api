@@ -28,10 +28,26 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $all_posts=$this->post->getAllPost();
-        return view('backend.posts.index')->with('post',$all_posts);
+        $filter_category = 0;
+        $url = url('admin/post');
+        // return $url;
+        if($request->filter_category)
+        {
+            $url  .= '?&filter_category='.$request->filter_category; 
+            $all_posts= $this->post->where('cat_id', $request->filter_category)
+            ->with('cat_info')
+            ->orderBy('id','ASC')
+            ->paginate(1)
+            ->setPath($url);
+            $filter_category = $request->filter_category;
+        }else{
+            $all_posts= $this->post->getAllPost();
+        }
+        
+        $categories = $this->category->get();
+        return view('backend.posts.index')->with('categories',$categories)->with('post',$all_posts)->with('filter_category', $filter_category);
     }
 
     /**

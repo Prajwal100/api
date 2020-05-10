@@ -47,10 +47,9 @@
                     
                     {{csrf_field()}}
                     {{method_field('DELETE')}}
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="post-table" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th ><button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete All Selected"><i class="fa fa-trash font-14"></i></buttton></th>
                                 <th>Title</th>
                                 <th>Category</th>
                                 <th>Pots Tab Manager</th>
@@ -62,12 +61,6 @@
                            @if($post)
                                 @foreach($post as $post_data)
                                 <tr>
-                                    <td>
-                                        <label class="ui-checkbox">
-                                            <input type="checkbox" name='muldel[]' value={{$post_data->id}}>
-                                            <span class="input-span"></span>
-                                        </label>
-                                    </td>
                                     <td>{{$post_data->title}}</td>
                                     <td>{{$post_data->cat_info->title}}</td>
                                     <td><a href="{{route('post.show', $post_data->id)}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
@@ -117,9 +110,85 @@
     </div>
     <!-- END PAGE CONTENT-->
     <footer class="page-footer">
-        <div class="font-13">2018 © <b>AdminCAST</b> - All rights reserved.</div>
-        <a class="px-4" href="http://themeforest.net/item/adminca-responsive-bootstrap-4-3-angular-4-admin-dashboard-template/20912589" target="_blank">BUY PREMIUM</a>
+        <div class="font-13">{{date('Y')}} © <b>{{env('APP_NAME')}}</b> - All rights reserved.</div>
         <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
     </footer>
 </div>
+@endsection
+
+@section('styles')
+    <style>
+        .dataTables_filter,.dataTables_length{
+            display:none;
+        }
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: left;
+        }
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: right;
+        }
+        .dataTables_info,.pagination{
+            display:none;
+        }
+        table.dataTable thead .sorting_asc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_desc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_asc:before {
+            opacity: 1;
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+        }
+        table.dataTable thead .sorting_asc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 0.3;
+        }
+        table.dataTable thead .sorting_desc:before {
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: .3;
+
+        }
+        table.dataTable thead .sorting_desc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 1;
+        }
+    </style>
+@endsection
+@section('scripts')
+<script>
+     $(function() {
+            $('#post-table').DataTable({
+                pageLength: 10,
+                //"ajax": './assets/demo/data/table_data.json',
+                /*"columns": [
+                    { "data": "name" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]*/
+            });
+        })
+</script>
 @endsection

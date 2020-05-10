@@ -151,11 +151,7 @@
                         @if($tab->type=='snippet')
                           @foreach($contents as $content)
                           <label>{{$content->title}}</label>
-                          <pre class="language-http copytoclipboard">
-                            <code>
-                              {{json_decode($content->snippet)}}
-                           </code>
-                          </pre>
+                          <pre class="language-http copytoclipboard"><code>{{json_decode($content->snippet)}}</code></pre>
                           @endforeach
                         @endif
                       </div>

@@ -23,17 +23,35 @@
                         
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="post-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th ><button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete All Selected"><i class="fa fa-trash font-14"></i></buttton></th>
+                                    <td></td>
+                                    <td>
+                                        <select name="filter_category" id="filter_category" class="form-control">
+                                            <option value="">Select Category</option>
+                                            @foreach($categories as $category)
+                                        <option value="{{$category->id}}" @if($category->id == $filter_category) selected @endif>{{$category->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td>
+                                        <button type="button" onclick="filterByCategory()" class="btn btn-default">filter</button>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>Title</th>
                                     <th>Category</th>
                                     <th>Pots Tab Manager</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
+                                
                             </thead>
+                            
                             <tbody>
                                @if($post)
                                     @foreach($post as $post_data)
@@ -41,12 +59,7 @@
                                         $child_cat_id=DB::table('categories')->select('title')->where('id',$post_data->child_cat_id)->get();
                                     ?>
                                     <tr>
-                                        <td>
-                                            <label class="ui-checkbox">
-                                                <input type="checkbox" name='muldel[]' value={{$post_data->id}}>
-                                                <span class="input-span"></span>
-                                            </label>
-                                        </td>
+
                                         <td>{{$post_data->title}}</td>
                                         <td>{{$post_data->cat_info->title}}</td>
                                         <td><a href="{{route('post.show', $post_data->id)}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
@@ -88,8 +101,89 @@
         <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
     </footer>
 </div>
+<script>
+    function filterByCategory()
+    {
+        var category = $('#filter_category').val();
+        var url = '{{url("/admin/post?")}}';
+        if(category != '')
+        {
+            url += 'filter_category='+category;
+        }
+        location = url;
+    }
+</script>
 @endsection
-{{-- @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@section('styles')
+    <style>
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: left;
+        }
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: right;
+        }
+        .dataTables_info,.pagination{
+            display:none;
+        }
+        table.dataTable thead .sorting_asc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_desc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_asc:before {
+            opacity: 1;
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+        }
+        table.dataTable thead .sorting_asc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 0.3;
+        }
+        table.dataTable thead .sorting_desc:before {
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: .3;
 
-@endsection --}}
+        }
+        table.dataTable thead .sorting_desc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 1;
+        }
+    </style>
+@endsection
+@section('scripts')
+<script>
+     $(function() {
+            $('#post-table').DataTable({
+                pageLength: 10,
+                //"ajax": './assets/demo/data/table_data.json',
+                /*"columns": [
+                    { "data": "name" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]*/
+            });
+        })
+</script>
+@endsection

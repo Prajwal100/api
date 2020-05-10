@@ -19,7 +19,7 @@
             <div class="ibox-body">
                 <div class="table-responsive">
                     {{-- <form method="POST" action="{{route('muldel')}}"> --}}
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="cat-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Title</th>
@@ -75,7 +75,76 @@
     </footer>
 </div>
 @endsection
-{{-- @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@section('styles')
+    <style>
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: left;
+        }
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: right;
+        }
+        .dataTables_info,.pagination{
+            display:none;
+        }
+        table.dataTable thead .sorting_asc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_desc{
+            cursor: pointer;
+            position: relative;
+        }
+        table.dataTable thead .sorting_asc:before {
+            opacity: 1;
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+        }
+        table.dataTable thead .sorting_asc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 0.3;
+        }
+        table.dataTable thead .sorting_desc:before {
+            right:1em;
+            content:"\2191";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: .3;
 
-@endsection --}}
+        }
+        table.dataTable thead .sorting_desc:after {
+            right:.5em;
+            content:"\2193";
+            position: absolute;
+            bottom: 0.9em;
+            display: block;
+            opacity: 1;
+        }
+    </style>
+@endsection
+@section('scripts')
+<script>
+     $(function() {
+            $('#cat-table').DataTable({
+                pageLength: 10,
+                //"ajax": './assets/demo/data/table_data.json',
+                /*"columns": [
+                    { "data": "name" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]*/
+            });
+        })
+</script>
+@endsection
