@@ -13,7 +13,12 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="title">Category Name</label>
-                        <input type="text" name="title" placeholder="Enter category name" class="form-control" required>
+                        <input type="text" name="title" placeholder="Enter category name" class="form-control" value="{{old('title')}}">
+                        @if($errors->has('title'))
+                            <span class="text-danger">
+                                <strong>{{$errors->first('title')}}</strong>
+                            </span>
+                        @endif
                     </div>
 
 
@@ -33,7 +38,12 @@
                     </div> --}}
                     <div class="form-group">
                         <label for="priority">Priority</label>
-                        <input type="number" class="form-control" name="priority">
+                        <input type="number" class="form-control" name="priority" placeholder="Enter number" value="{{old('priority')}}">
+                        @if($errors->has('priority'))
+                            <span class="text-danger">
+                                {{$errors->first('priority')}}
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>

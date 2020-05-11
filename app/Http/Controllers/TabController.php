@@ -44,7 +44,8 @@ class TabController extends Controller
         $this->validate($request, [
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
-            'type'=>'required|in:table,snippet'
+            'type'=>'required|in:table,snippet',
+            'priority' => 'integer|required'
         ]);
 
         

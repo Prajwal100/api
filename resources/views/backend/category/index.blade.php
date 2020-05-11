@@ -138,6 +138,11 @@
      $(function() {
             $('#cat-table').DataTable({
                 pageLength: 10,
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "targets": [2,3] },
+                    { "orderable": true, "targets": [0,1] }
+                ]
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
                     { "data": "name" },

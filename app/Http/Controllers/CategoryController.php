@@ -42,7 +42,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $ruls=$this->category->getRules();
+        $this->validate($request,[
+            'title'=>'required|string',
+            'priority'=>'integer|required',
+            'status'=>'required|in:active,inactive'
+        ]);
         
         $data=$request->all();
         $data['slug']=$this->category->getSlug($request->title);

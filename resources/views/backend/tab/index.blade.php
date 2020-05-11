@@ -136,6 +136,11 @@
      $(function() {
             $('#example-table').DataTable({
                 pageLength: 10,
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "targets": [3,4] },
+                    { "orderable": true, "targets": [0,1,2] }
+                ]
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
                     { "data": "name" },

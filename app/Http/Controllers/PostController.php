@@ -73,7 +73,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $ruls=$this->post->getRules();
+        $this->validate($request, [
+            'title'=>'string|required',
+            'status'=>'required|in:active,inactive',
+            'description'=>'required|string',
+            'priority'=>'required|integer',
+        ]);
+
+        // $this->validate($ruls);z
+        // $request->validate($ruls);
         // dd($ruls);
         $slug=$this->category->getSlug($request->title);
         $data = [
