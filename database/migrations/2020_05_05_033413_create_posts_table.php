@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->integer('cat_id')->unsigned()->nullable();
             $table->integer('priority')->nullable();
             // $table->integer('child_cat_id')->unsigned()->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('SET NULL');
             // $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('CASCADE');

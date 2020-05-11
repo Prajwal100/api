@@ -76,9 +76,10 @@ class PostController extends Controller
         $this->validate($request, [
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
-            'description'=>'required|string',
+            'description'=>'nullable|string',
             'priority'=>'required|integer',
         ]);
+        // dd($request->all());
 
         // $this->validate($ruls);z
         // $request->validate($ruls);
@@ -93,6 +94,7 @@ class PostController extends Controller
             'cat_id' => $request->cat_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
+        // dd($data);
         \App\Models\Post::create($data);
         request()->session()->flash('success','Post successfully added');
         return redirect()->route('post.index');

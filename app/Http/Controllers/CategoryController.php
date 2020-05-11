@@ -132,12 +132,8 @@ class CategoryController extends Controller
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
         }
-        $child_cat_id=$this->category->where('parent_id',$id)->pluck('id');
         $del=$this->category->delete();
         if($del){
-            if($child_cat_id->count()>0){
-                $this->category->shiftChild($child_cat_id);
-            }
             request()->session()->flash('success','Category successfully deleted');
         }
         else{
