@@ -166,7 +166,12 @@ class PostController extends Controller
         //     request()->session()->flash('error','Post not found');
         //     return redirect()->route('post.index');
         // }
-        $ruls=$this->post->getRules();
+        $this->validate($request, [
+            'title'=>'string|required',
+            'status'=>'required|in:active,inactive',
+            'description'=>'nullable|string',
+            'priority'=>'required|integer',
+        ]);
         
         // $data=$request->all();
         // // dd($data);
