@@ -26,6 +26,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <input type="number" class="form-control" name="priority" value="{{$tab_data->priority}}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
                             <option value="active" {{($tab_data->status=='active') ? 'selected' : ''}}>active</option>

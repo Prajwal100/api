@@ -1,11 +1,11 @@
 <header class="header">
     <div class="page-brand">
-        {{-- <a class="link" href="{{route('admin')}}">
-            <span class="brand">E-
-                <span class="brand-tip">CROZA</span>
+        <a class="link" href="{{route('admin')}}">
+            <span class="brand">{{env('app_name')}}
+                {{-- <span class="brand-tip">CROZA</span> --}}
             </span>
-            <span class="brand-mini">EC</span>
-        </a> --}}
+            <span class="brand-mini"><small>{{env('app_name')}}</small></span>
+        </a>
     </div>
     <div class="flexbox flex-1">
         <!-- START TOP-LEFT TOOLBAR-->

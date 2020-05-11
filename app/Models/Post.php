@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable=['title','slug','status','cat_id','child_cat_id','description', 'tab_ids'];
+    protected $fillable=['title','slug','status','cat_id','child_cat_id','description', 'tab_ids','priority'];
 
     public function getRules(){
         return[

@@ -27,6 +27,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Type</th>
+                                    <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -37,6 +38,7 @@
                                     <tr>
                                         <td>{{$tab_data->title}}</td>
                                         <td>{{$tab_data->type}}</td>
+                                        <td>{{$tab_data->priority}}</td>
                                         <td>
                                             @if($tab_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

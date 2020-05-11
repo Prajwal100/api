@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
+                                    <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -36,6 +37,7 @@
                                     <tr>
 
                                         <td>{{$category_data->title}}</td>
+                                        <td>{{$category_data->priority}}</td>
                                         <td>
                                             @if($category_data->status=='active') 
                                                 <span class="badge badge-success">active</span>

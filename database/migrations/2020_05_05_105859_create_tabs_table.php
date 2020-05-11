@@ -17,6 +17,7 @@ class CreateTabsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->enum('type',['table','snippet']);
+            $table->integer('priority')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

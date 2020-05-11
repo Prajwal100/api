@@ -31,7 +31,10 @@
                             @endforeach
                         </select>
                     </div> --}}
-
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <input type="number" class="form-control" name="priority">
+                    </div>
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">

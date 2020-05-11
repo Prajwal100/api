@@ -143,4 +143,6 @@ class TypeController extends Controller
         }
         return redirect()->route('type.index');
     }
+
+
 }

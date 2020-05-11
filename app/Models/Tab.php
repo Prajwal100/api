@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tab extends Model
 {
-    protected $fillable=['title','status','type'];
+    protected $fillable=['title','status','type','priority'];
 
     public function getTypeByTitle($title){
         // debugger();

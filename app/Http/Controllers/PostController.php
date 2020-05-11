@@ -74,11 +74,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $ruls=$this->post->getRules();
+        // dd($ruls);
         $slug=$this->category->getSlug($request->title);
         $data = [
             'title' => $request->title,
             'description' => $request->description,
             'slug' => $slug,
+            'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->cat_id,
             'tab_ids' => json_encode($request->tab_ids)
@@ -110,7 +112,7 @@ class PostController extends Controller
     {
         $post = \App\Models\Post::find($id);
         $tab_ids = json_decode($post->tab_ids);
-        $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->get();
+        $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->orderBy('priority', 'asc')->get();
         return view('backend.posts.view')->with('post', $post)->with('tabs', $tabs);
 
     }
@@ -165,10 +167,12 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'slug' => $slug,
+            'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->cat_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
+        // dd($data);
         
         // $status=$this->post->save();
         $status = \App\Models\Post::find($id)->update($data);
